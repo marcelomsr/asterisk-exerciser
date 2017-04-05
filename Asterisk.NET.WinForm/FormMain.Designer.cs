@@ -88,7 +88,7 @@ namespace Asterisk.NET.WinForm
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(100, 20);
             this.tbAddress.TabIndex = 1;
-            this.tbAddress.Text = "10.0.68.56";
+            this.tbAddress.Text = "localhost";
             // 
             // grp_box_connection
             // 
@@ -131,7 +131,6 @@ namespace Asterisk.NET.WinForm
             this.tbUser.Name = "tbUser";
             this.tbUser.Size = new System.Drawing.Size(100, 20);
             this.tbUser.TabIndex = 3;
-            this.tbUser.Text = "ctiuser";
             // 
             // tbPassword
             // 
@@ -140,7 +139,6 @@ namespace Asterisk.NET.WinForm
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 20);
             this.tbPassword.TabIndex = 4;
-            this.tbPassword.Text = "CTIuser01%";
             // 
             // lbl_port
             // 
@@ -157,7 +155,7 @@ namespace Asterisk.NET.WinForm
             this.tbPort.Name = "tbPort";
             this.tbPort.Size = new System.Drawing.Size(100, 20);
             this.tbPort.TabIndex = 2;
-            this.tbPort.Text = "5039";
+            this.tbPort.Text = "5038";
             // 
             // btn_discar
             // 
