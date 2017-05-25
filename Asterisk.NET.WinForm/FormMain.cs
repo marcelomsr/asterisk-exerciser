@@ -10,11 +10,14 @@ using Asterisk.NET.Manager.Event;
 using System.Diagnostics;
 using Asterisk.NET.Manager.Action;
 using Asterisk.NET.Manager.Response;
+using System.IO;
 
 namespace Asterisk.NET.WinForm
 {
     public partial class FormMain : Form
     {
+        private const string _NME_ARQUIVO_DADOS_CONEXAO = "astExe.txt";
+
         // Dados de conexão
         private bool _conectado;
         private string _address;
@@ -41,6 +44,11 @@ namespace Asterisk.NET.WinForm
             _messages_spy = new Dictionary<int, string>();
             _lock_messages = new Object();
             _filter = "";
+
+            string arquivo_dados_conexao = Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO;
+
+            if (File.Exists(arquivo_dados_conexao))
+                carregar_dados_conexao();
         }
 
         private void conectar()
@@ -153,16 +161,29 @@ namespace Asterisk.NET.WinForm
                 return;
             }
 
-            if (e.Channel != null)
-                txt_channel.Text = e.Channel;
-            else
-                txt_channel.Text = e.DestChannel;
+            if (e.Channel == null)
+                e.Channel = "";
+
+            if (e.DestChannel == null)
+                e.DestChannel = "";
+
+            if (!e.Channel.Contains(txt_channel.Text) && !e.DestChannel.Contains(txt_channel.Text))
+                return;
 
             register_spy(e.ToString());
         }
 
         private void tratar_dial_end(object sender, DialEndEvent e)
         {
+            if (e.Channel == null)
+                e.Channel = "";
+
+            if (e.DestChannel == null)
+                e.DestChannel = "";
+
+            if (!e.Channel.Contains(txt_channel.Text) && !e.DestChannel.Contains(txt_channel.Text))
+                return;
+
             register_spy(e.ToString());
         }
 
@@ -178,10 +199,15 @@ namespace Asterisk.NET.WinForm
                 return;
             }
 
-            int position = txt_channel.Text.IndexOf('-');
+            if (e.Channel == null)
+                e.Channel = "";
 
-            if (position > 0)
-                txt_channel.Text = txt_channel.Text.Substring(0, position);
+            if (!e.Channel.Contains(txt_channel.Text))
+                return;
+
+            // Se o channel do hangup for o channel do campo discado, então libera para discar novamente.
+            btn_desligar.Enabled = false;
+            btn_discar.Enabled = true;
 
             register_spy(e.ToString());
         }
@@ -257,7 +283,7 @@ namespace Asterisk.NET.WinForm
             action.Context = txt_context.Text;
             action.Exten = txt_exten.Text;
             action.Priority = 1;
-            //action.CallerId = "110001";
+            //action.CallerId = "01111001516093996207";
             action.Timeout = Convert.ToInt32(txt_timeout.Text); // Default 30000 (30 segundos)
             action.Variable = string.Format("var1={0},var2={1},var3={2}", txt_var1.Text, txt_var2.Text, txt_var3.Text);
             action.ActionId = _actionID++.ToString();//"ABCABCTODACRIANCATEMQUELEREESCREVER";
@@ -282,7 +308,7 @@ namespace Asterisk.NET.WinForm
             ManagerResponse mr = _manager.SendAction(action);
             register_spy(action.ToString());
             register_spy(mr.ToString());
-                        
+
             btn_discar.Enabled = mr.IsSuccess();
             btn_desligar.Enabled = !btn_discar.Enabled;
             btn_mix_monitor.Enabled = btn_desligar.Enabled;
@@ -352,6 +378,8 @@ namespace Asterisk.NET.WinForm
 
         private void btn_conexao_Click(object sender, EventArgs e)
         {
+            salvar_dados_conexao();
+
             if (_conectado)
                 desconectar();
             else
@@ -428,6 +456,8 @@ namespace Asterisk.NET.WinForm
             rch_txt_spy.ContextMenu = context_menu;
         }
 
+        #endregion
+
         private void limpar_log(object sender, EventArgs e)
         {
             _messages_spy.Clear();
@@ -440,7 +470,35 @@ namespace Asterisk.NET.WinForm
             rch_txt_spy.Copy();
         }
 
-        #endregion
+        private void salvar_dados_conexao()
+        {
+            StreamWriter wr = new StreamWriter(Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO, false, Encoding.UTF8);
+            wr.Write(String.Format("{0}\r\n{1}\r\n{2}\r\n{3}", tbAddress.Text, tbPort.Text, tbUser.Text, tbPassword.Text));
+            wr.Close();
+        }
 
+        private void carregar_dados_conexao()
+        {
+            StreamReader reader = new StreamReader(Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO, Encoding.UTF8);
+
+            string linha = string.Empty;
+
+            for (int i = 0; (linha = reader.ReadLine()) != null; i++)
+            {
+                if (i == 0)
+                    tbAddress.Text = linha;
+
+                if (i == 1)
+                    tbPort.Text = linha;
+
+                if (i == 2)
+                    tbUser.Text = linha;
+
+                if (i == 3)
+                    tbPassword.Text = linha;
+            }
+
+            reader.Close();
+        }
     }
 }

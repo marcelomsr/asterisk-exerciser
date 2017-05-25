@@ -348,9 +348,9 @@ namespace Asterisk.NET.WinForm
             // 
             this.stt_strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbl_status});
-            this.stt_strip.Location = new System.Drawing.Point(0, 488);
+            this.stt_strip.Location = new System.Drawing.Point(0, 508);
             this.stt_strip.Name = "stt_strip";
-            this.stt_strip.Size = new System.Drawing.Size(632, 22);
+            this.stt_strip.Size = new System.Drawing.Size(912, 22);
             this.stt_strip.TabIndex = 26;
             this.stt_strip.Text = "statusStrip1";
             // 
@@ -390,7 +390,7 @@ namespace Asterisk.NET.WinForm
             this.rch_txt_spy.Location = new System.Drawing.Point(238, 46);
             this.rch_txt_spy.Name = "rch_txt_spy";
             this.rch_txt_spy.ReadOnly = true;
-            this.rch_txt_spy.Size = new System.Drawing.Size(387, 431);
+            this.rch_txt_spy.Size = new System.Drawing.Size(667, 451);
             this.rch_txt_spy.TabIndex = 29;
             this.rch_txt_spy.Text = "";
             this.rch_txt_spy.WordWrap = false;
@@ -459,7 +459,7 @@ namespace Asterisk.NET.WinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 510);
+            this.ClientSize = new System.Drawing.Size(912, 530);
             this.Controls.Add(this.btn_stop_mix_monitor);
             this.Controls.Add(this.btn_mix_monitor);
             this.Controls.Add(this.btn_clear_filter);
@@ -493,7 +493,6 @@ namespace Asterisk.NET.WinForm
             this.Controls.Add(this.btn_discar);
             this.Controls.Add(this.grp_box_connection);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MinimizeBox = false;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Client for Asterisk";
