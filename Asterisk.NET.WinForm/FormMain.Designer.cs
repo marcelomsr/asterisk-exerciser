@@ -41,12 +41,8 @@ namespace Asterisk.NET.WinForm
             this.txt_command = new System.Windows.Forms.TextBox();
             this.btn_send_command = new System.Windows.Forms.Button();
             this.btn_redirect = new System.Windows.Forms.Button();
-            this.txt_var1 = new System.Windows.Forms.TextBox();
-            this.txt_var2 = new System.Windows.Forms.TextBox();
-            this.txt_var3 = new System.Windows.Forms.TextBox();
-            this.lbl_var1 = new System.Windows.Forms.Label();
-            this.lbl_var2 = new System.Windows.Forms.Label();
-            this.lbl_var3 = new System.Windows.Forms.Label();
+            this.txt_variables = new System.Windows.Forms.TextBox();
+            this.lbl_variables = new System.Windows.Forms.Label();
             this.lbl_channel = new System.Windows.Forms.Label();
             this.txt_channel = new System.Windows.Forms.TextBox();
             this.lbl_exten = new System.Windows.Forms.Label();
@@ -69,6 +65,10 @@ namespace Asterisk.NET.WinForm
             this.btn_clear_filter = new System.Windows.Forms.Button();
             this.btn_stop_mix_monitor = new System.Windows.Forms.Button();
             this.btn_mix_monitor = new System.Windows.Forms.Button();
+            this.chkDialBegin = new System.Windows.Forms.CheckBox();
+            this.chkDialEnd = new System.Windows.Forms.CheckBox();
+            this.chk_hangup = new System.Windows.Forms.CheckBox();
+            this.chkVarSet = new System.Windows.Forms.CheckBox();
             this.grp_box_connection.SuspendLayout();
             this.stt_strip.SuspendLayout();
             this.SuspendLayout();
@@ -100,7 +100,7 @@ namespace Asterisk.NET.WinForm
             this.grp_box_connection.Controls.Add(this.tbPort);
             this.grp_box_connection.Controls.Add(this.lbl_host);
             this.grp_box_connection.Controls.Add(this.tbAddress);
-            this.grp_box_connection.Location = new System.Drawing.Point(1, 1);
+            this.grp_box_connection.Location = new System.Drawing.Point(3, 1);
             this.grp_box_connection.Name = "grp_box_connection";
             this.grp_box_connection.Size = new System.Drawing.Size(200, 124);
             this.grp_box_connection.TabIndex = 2;
@@ -160,9 +160,9 @@ namespace Asterisk.NET.WinForm
             // btn_discar
             // 
             this.btn_discar.Enabled = false;
-            this.btn_discar.Location = new System.Drawing.Point(10, 157);
+            this.btn_discar.Location = new System.Drawing.Point(6, 157);
             this.btn_discar.Name = "btn_discar";
-            this.btn_discar.Size = new System.Drawing.Size(90, 23);
+            this.btn_discar.Size = new System.Drawing.Size(92, 23);
             this.btn_discar.TabIndex = 5;
             this.btn_discar.Text = "Discar";
             this.btn_discar.UseVisualStyleBackColor = true;
@@ -189,69 +189,35 @@ namespace Asterisk.NET.WinForm
             // btn_redirect
             // 
             this.btn_redirect.Enabled = false;
-            this.btn_redirect.Location = new System.Drawing.Point(105, 128);
+            this.btn_redirect.Location = new System.Drawing.Point(103, 128);
             this.btn_redirect.Name = "btn_redirect";
-            this.btn_redirect.Size = new System.Drawing.Size(90, 23);
+            this.btn_redirect.Size = new System.Drawing.Size(92, 23);
             this.btn_redirect.TabIndex = 10;
             this.btn_redirect.Text = "Redirect";
             this.btn_redirect.UseVisualStyleBackColor = true;
             this.btn_redirect.Click += new System.EventHandler(this.btn_redirect_Click);
             // 
-            // txt_var1
+            // txt_variables
             // 
-            this.txt_var1.Location = new System.Drawing.Point(70, 348);
-            this.txt_var1.Name = "txt_var1";
-            this.txt_var1.Size = new System.Drawing.Size(126, 20);
-            this.txt_var1.TabIndex = 9;
-            this.txt_var1.Text = "var1";
+            this.txt_variables.Location = new System.Drawing.Point(59, 348);
+            this.txt_variables.Name = "txt_variables";
+            this.txt_variables.Size = new System.Drawing.Size(158, 20);
+            this.txt_variables.TabIndex = 9;
+            this.txt_variables.Text = "var1=var1,var2=var2,var3=var3";
             // 
-            // txt_var2
+            // lbl_variables
             // 
-            this.txt_var2.Location = new System.Drawing.Point(70, 374);
-            this.txt_var2.Name = "txt_var2";
-            this.txt_var2.Size = new System.Drawing.Size(126, 20);
-            this.txt_var2.TabIndex = 10;
-            this.txt_var2.Text = "var2";
-            // 
-            // txt_var3
-            // 
-            this.txt_var3.Location = new System.Drawing.Point(70, 400);
-            this.txt_var3.Name = "txt_var3";
-            this.txt_var3.Size = new System.Drawing.Size(126, 20);
-            this.txt_var3.TabIndex = 11;
-            this.txt_var3.Text = "var3";
-            // 
-            // lbl_var1
-            // 
-            this.lbl_var1.AutoSize = true;
-            this.lbl_var1.Location = new System.Drawing.Point(13, 351);
-            this.lbl_var1.Name = "lbl_var1";
-            this.lbl_var1.Size = new System.Drawing.Size(28, 13);
-            this.lbl_var1.TabIndex = 10;
-            this.lbl_var1.Text = "var1";
-            // 
-            // lbl_var2
-            // 
-            this.lbl_var2.AutoSize = true;
-            this.lbl_var2.Location = new System.Drawing.Point(12, 377);
-            this.lbl_var2.Name = "lbl_var2";
-            this.lbl_var2.Size = new System.Drawing.Size(28, 13);
-            this.lbl_var2.TabIndex = 14;
-            this.lbl_var2.Text = "var2";
-            // 
-            // lbl_var3
-            // 
-            this.lbl_var3.AutoSize = true;
-            this.lbl_var3.Location = new System.Drawing.Point(13, 403);
-            this.lbl_var3.Name = "lbl_var3";
-            this.lbl_var3.Size = new System.Drawing.Size(28, 13);
-            this.lbl_var3.TabIndex = 15;
-            this.lbl_var3.Text = "var3";
+            this.lbl_variables.AutoSize = true;
+            this.lbl_variables.Location = new System.Drawing.Point(8, 351);
+            this.lbl_variables.Name = "lbl_variables";
+            this.lbl_variables.Size = new System.Drawing.Size(50, 13);
+            this.lbl_variables.TabIndex = 10;
+            this.lbl_variables.Text = "Variables";
             // 
             // lbl_channel
             // 
             this.lbl_channel.AutoSize = true;
-            this.lbl_channel.Location = new System.Drawing.Point(12, 223);
+            this.lbl_channel.Location = new System.Drawing.Point(7, 223);
             this.lbl_channel.Name = "lbl_channel";
             this.lbl_channel.Size = new System.Drawing.Size(46, 13);
             this.lbl_channel.TabIndex = 16;
@@ -259,16 +225,16 @@ namespace Asterisk.NET.WinForm
             // 
             // txt_channel
             // 
-            this.txt_channel.Location = new System.Drawing.Point(70, 220);
+            this.txt_channel.Location = new System.Drawing.Point(59, 220);
             this.txt_channel.Name = "txt_channel";
-            this.txt_channel.Size = new System.Drawing.Size(126, 20);
+            this.txt_channel.Size = new System.Drawing.Size(137, 20);
             this.txt_channel.TabIndex = 6;
             this.txt_channel.Text = "SIP/551101";
             // 
             // lbl_exten
             // 
             this.lbl_exten.AutoSize = true;
-            this.lbl_exten.Location = new System.Drawing.Point(12, 247);
+            this.lbl_exten.Location = new System.Drawing.Point(7, 247);
             this.lbl_exten.Name = "lbl_exten";
             this.lbl_exten.Size = new System.Drawing.Size(34, 13);
             this.lbl_exten.TabIndex = 18;
@@ -276,16 +242,16 @@ namespace Asterisk.NET.WinForm
             // 
             // txt_exten
             // 
-            this.txt_exten.Location = new System.Drawing.Point(70, 244);
+            this.txt_exten.Location = new System.Drawing.Point(59, 244);
             this.txt_exten.Name = "txt_exten";
-            this.txt_exten.Size = new System.Drawing.Size(126, 20);
+            this.txt_exten.Size = new System.Drawing.Size(137, 20);
             this.txt_exten.TabIndex = 7;
             this.txt_exten.Text = "551102";
             // 
             // lbl_context
             // 
             this.lbl_context.AutoSize = true;
-            this.lbl_context.Location = new System.Drawing.Point(12, 273);
+            this.lbl_context.Location = new System.Drawing.Point(7, 273);
             this.lbl_context.Name = "lbl_context";
             this.lbl_context.Size = new System.Drawing.Size(43, 13);
             this.lbl_context.TabIndex = 20;
@@ -293,18 +259,18 @@ namespace Asterisk.NET.WinForm
             // 
             // txt_context
             // 
-            this.txt_context.Location = new System.Drawing.Point(70, 270);
+            this.txt_context.Location = new System.Drawing.Point(59, 270);
             this.txt_context.Name = "txt_context";
-            this.txt_context.Size = new System.Drawing.Size(126, 20);
+            this.txt_context.Size = new System.Drawing.Size(137, 20);
             this.txt_context.TabIndex = 8;
             this.txt_context.Text = "agentes";
             // 
             // btn_desligar
             // 
             this.btn_desligar.Enabled = false;
-            this.btn_desligar.Location = new System.Drawing.Point(105, 157);
+            this.btn_desligar.Location = new System.Drawing.Point(103, 157);
             this.btn_desligar.Name = "btn_desligar";
-            this.btn_desligar.Size = new System.Drawing.Size(90, 23);
+            this.btn_desligar.Size = new System.Drawing.Size(92, 23);
             this.btn_desligar.TabIndex = 21;
             this.btn_desligar.Text = "Desligar";
             this.btn_desligar.UseVisualStyleBackColor = true;
@@ -313,7 +279,7 @@ namespace Asterisk.NET.WinForm
             // lbl_timeout
             // 
             this.lbl_timeout.AutoSize = true;
-            this.lbl_timeout.Location = new System.Drawing.Point(12, 325);
+            this.lbl_timeout.Location = new System.Drawing.Point(7, 325);
             this.lbl_timeout.Name = "lbl_timeout";
             this.lbl_timeout.Size = new System.Drawing.Size(45, 13);
             this.lbl_timeout.TabIndex = 23;
@@ -321,16 +287,16 @@ namespace Asterisk.NET.WinForm
             // 
             // txt_timeout
             // 
-            this.txt_timeout.Location = new System.Drawing.Point(70, 322);
+            this.txt_timeout.Location = new System.Drawing.Point(59, 322);
             this.txt_timeout.Name = "txt_timeout";
-            this.txt_timeout.Size = new System.Drawing.Size(126, 20);
+            this.txt_timeout.Size = new System.Drawing.Size(137, 20);
             this.txt_timeout.TabIndex = 22;
             this.txt_timeout.Text = "30000";
             // 
             // lbl_priority
             // 
             this.lbl_priority.AutoSize = true;
-            this.lbl_priority.Location = new System.Drawing.Point(12, 299);
+            this.lbl_priority.Location = new System.Drawing.Point(7, 299);
             this.lbl_priority.Name = "lbl_priority";
             this.lbl_priority.Size = new System.Drawing.Size(38, 13);
             this.lbl_priority.TabIndex = 25;
@@ -338,9 +304,9 @@ namespace Asterisk.NET.WinForm
             // 
             // txt_priority
             // 
-            this.txt_priority.Location = new System.Drawing.Point(70, 296);
+            this.txt_priority.Location = new System.Drawing.Point(59, 296);
             this.txt_priority.Name = "txt_priority";
-            this.txt_priority.Size = new System.Drawing.Size(126, 20);
+            this.txt_priority.Size = new System.Drawing.Size(137, 20);
             this.txt_priority.TabIndex = 24;
             this.txt_priority.Text = "1";
             // 
@@ -348,7 +314,7 @@ namespace Asterisk.NET.WinForm
             // 
             this.stt_strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbl_status});
-            this.stt_strip.Location = new System.Drawing.Point(0, 508);
+            this.stt_strip.Location = new System.Drawing.Point(0, 562);
             this.stt_strip.Name = "stt_strip";
             this.stt_strip.Size = new System.Drawing.Size(912, 22);
             this.stt_strip.TabIndex = 26;
@@ -364,9 +330,9 @@ namespace Asterisk.NET.WinForm
             // 
             // btn_conexao
             // 
-            this.btn_conexao.Location = new System.Drawing.Point(10, 128);
+            this.btn_conexao.Location = new System.Drawing.Point(6, 128);
             this.btn_conexao.Name = "btn_conexao";
-            this.btn_conexao.Size = new System.Drawing.Size(90, 23);
+            this.btn_conexao.Size = new System.Drawing.Size(92, 23);
             this.btn_conexao.TabIndex = 27;
             this.btn_conexao.Text = "Conectar";
             this.btn_conexao.UseVisualStyleBackColor = true;
@@ -376,9 +342,9 @@ namespace Asterisk.NET.WinForm
             // 
             this.btn_expand_collapse.Location = new System.Drawing.Point(201, 141);
             this.btn_expand_collapse.Name = "btn_expand_collapse";
-            this.btn_expand_collapse.Size = new System.Drawing.Size(31, 23);
+            this.btn_expand_collapse.Size = new System.Drawing.Size(27, 23);
             this.btn_expand_collapse.TabIndex = 28;
-            this.btn_expand_collapse.Text = "< <";
+            this.btn_expand_collapse.Text = "<<";
             this.btn_expand_collapse.UseVisualStyleBackColor = true;
             this.btn_expand_collapse.Click += new System.EventHandler(this.btn_expand_collapse_Click);
             // 
@@ -390,7 +356,7 @@ namespace Asterisk.NET.WinForm
             this.rch_txt_spy.Location = new System.Drawing.Point(238, 46);
             this.rch_txt_spy.Name = "rch_txt_spy";
             this.rch_txt_spy.ReadOnly = true;
-            this.rch_txt_spy.Size = new System.Drawing.Size(667, 451);
+            this.rch_txt_spy.Size = new System.Drawing.Size(667, 505);
             this.rch_txt_spy.TabIndex = 29;
             this.rch_txt_spy.Text = "";
             this.rch_txt_spy.WordWrap = false;
@@ -436,9 +402,9 @@ namespace Asterisk.NET.WinForm
             // btn_stop_mix_monitor
             // 
             this.btn_stop_mix_monitor.Enabled = false;
-            this.btn_stop_mix_monitor.Location = new System.Drawing.Point(105, 186);
+            this.btn_stop_mix_monitor.Location = new System.Drawing.Point(103, 186);
             this.btn_stop_mix_monitor.Name = "btn_stop_mix_monitor";
-            this.btn_stop_mix_monitor.Size = new System.Drawing.Size(90, 23);
+            this.btn_stop_mix_monitor.Size = new System.Drawing.Size(92, 23);
             this.btn_stop_mix_monitor.TabIndex = 35;
             this.btn_stop_mix_monitor.Text = "Stop Mix Monitor";
             this.btn_stop_mix_monitor.UseVisualStyleBackColor = true;
@@ -447,19 +413,67 @@ namespace Asterisk.NET.WinForm
             // btn_mix_monitor
             // 
             this.btn_mix_monitor.Enabled = false;
-            this.btn_mix_monitor.Location = new System.Drawing.Point(10, 186);
+            this.btn_mix_monitor.Location = new System.Drawing.Point(6, 186);
             this.btn_mix_monitor.Name = "btn_mix_monitor";
-            this.btn_mix_monitor.Size = new System.Drawing.Size(90, 23);
+            this.btn_mix_monitor.Size = new System.Drawing.Size(92, 23);
             this.btn_mix_monitor.TabIndex = 34;
             this.btn_mix_monitor.Text = "Mix Monitor";
             this.btn_mix_monitor.UseVisualStyleBackColor = true;
             this.btn_mix_monitor.Click += new System.EventHandler(this.btn_mix_monitor_Click);
             // 
+            // chkDialBegin
+            // 
+            this.chkDialBegin.AutoSize = true;
+            this.chkDialBegin.Location = new System.Drawing.Point(10, 497);
+            this.chkDialBegin.Name = "chkDialBegin";
+            this.chkDialBegin.Size = new System.Drawing.Size(71, 17);
+            this.chkDialBegin.TabIndex = 36;
+            this.chkDialBegin.Text = "DialBegin";
+            this.chkDialBegin.UseVisualStyleBackColor = true;
+            this.chkDialBegin.CheckedChanged += new System.EventHandler(this.chkDialBegin_CheckedChanged);
+            // 
+            // chkDialEnd
+            // 
+            this.chkDialEnd.AutoSize = true;
+            this.chkDialEnd.Location = new System.Drawing.Point(105, 497);
+            this.chkDialEnd.Name = "chkDialEnd";
+            this.chkDialEnd.Size = new System.Drawing.Size(63, 17);
+            this.chkDialEnd.TabIndex = 37;
+            this.chkDialEnd.Text = "DialEnd";
+            this.chkDialEnd.UseVisualStyleBackColor = true;
+            this.chkDialEnd.CheckedChanged += new System.EventHandler(this.chkDialEnd_CheckedChanged);
+            // 
+            // chk_hangup
+            // 
+            this.chk_hangup.AutoSize = true;
+            this.chk_hangup.Location = new System.Drawing.Point(10, 520);
+            this.chk_hangup.Name = "chk_hangup";
+            this.chk_hangup.Size = new System.Drawing.Size(64, 17);
+            this.chk_hangup.TabIndex = 38;
+            this.chk_hangup.Text = "Hangup";
+            this.chk_hangup.UseVisualStyleBackColor = true;
+            this.chk_hangup.CheckedChanged += new System.EventHandler(this.chk_hangup_CheckedChanged);
+            // 
+            // chkVarSet
+            // 
+            this.chkVarSet.AutoSize = true;
+            this.chkVarSet.Location = new System.Drawing.Point(105, 520);
+            this.chkVarSet.Name = "chkVarSet";
+            this.chkVarSet.Size = new System.Drawing.Size(58, 17);
+            this.chkVarSet.TabIndex = 39;
+            this.chkVarSet.Text = "VarSet";
+            this.chkVarSet.UseVisualStyleBackColor = true;
+            this.chkVarSet.CheckedChanged += new System.EventHandler(this.chkVarSet_CheckedChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(912, 530);
+            this.ClientSize = new System.Drawing.Size(912, 584);
+            this.Controls.Add(this.chkVarSet);
+            this.Controls.Add(this.chk_hangup);
+            this.Controls.Add(this.chkDialEnd);
+            this.Controls.Add(this.chkDialBegin);
             this.Controls.Add(this.btn_stop_mix_monitor);
             this.Controls.Add(this.btn_mix_monitor);
             this.Controls.Add(this.btn_clear_filter);
@@ -481,12 +495,8 @@ namespace Asterisk.NET.WinForm
             this.Controls.Add(this.txt_exten);
             this.Controls.Add(this.lbl_channel);
             this.Controls.Add(this.txt_channel);
-            this.Controls.Add(this.lbl_var3);
-            this.Controls.Add(this.lbl_var2);
-            this.Controls.Add(this.lbl_var1);
-            this.Controls.Add(this.txt_var3);
-            this.Controls.Add(this.txt_var2);
-            this.Controls.Add(this.txt_var1);
+            this.Controls.Add(this.lbl_variables);
+            this.Controls.Add(this.txt_variables);
             this.Controls.Add(this.btn_redirect);
             this.Controls.Add(this.btn_send_command);
             this.Controls.Add(this.txt_command);
@@ -521,12 +531,8 @@ namespace Asterisk.NET.WinForm
         private System.Windows.Forms.TextBox txt_command;
         private System.Windows.Forms.Button btn_send_command;
         private System.Windows.Forms.Button btn_redirect;
-        private System.Windows.Forms.TextBox txt_var1;
-        private System.Windows.Forms.TextBox txt_var2;
-        private System.Windows.Forms.TextBox txt_var3;
-        private System.Windows.Forms.Label lbl_var1;
-        private System.Windows.Forms.Label lbl_var2;
-        private System.Windows.Forms.Label lbl_var3;
+        private System.Windows.Forms.TextBox txt_variables;
+        private System.Windows.Forms.Label lbl_variables;
         private System.Windows.Forms.Label lbl_channel;
         private System.Windows.Forms.TextBox txt_channel;
         private System.Windows.Forms.Label lbl_exten;
@@ -549,6 +555,10 @@ namespace Asterisk.NET.WinForm
         private System.Windows.Forms.Button btn_clear_filter;
         private System.Windows.Forms.Button btn_stop_mix_monitor;
         private System.Windows.Forms.Button btn_mix_monitor;
+        private System.Windows.Forms.CheckBox chkDialBegin;
+        private System.Windows.Forms.CheckBox chkDialEnd;
+        private System.Windows.Forms.CheckBox chk_hangup;
+        private System.Windows.Forms.CheckBox chkVarSet;
     }
 }
 

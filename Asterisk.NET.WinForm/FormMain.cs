@@ -1,16 +1,13 @@
+using Asterisk.NET.Manager;
+using Asterisk.NET.Manager.Action;
+using Asterisk.NET.Manager.Event;
+using Asterisk.NET.Manager.Response;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using Asterisk.NET.Manager;
-using Asterisk.NET.Manager.Event;
-using System.Diagnostics;
-using Asterisk.NET.Manager.Action;
-using Asterisk.NET.Manager.Response;
-using System.IO;
 
 namespace Asterisk.NET.WinForm
 {
@@ -63,10 +60,6 @@ namespace Asterisk.NET.WinForm
             // Define os eventos
             _manager.UnhandledEvent += new ManagerEventHandler(manager_Events);
             _manager.ConnectionState += new ConnectionStateEventHandler(tratar_connection_state);
-            _manager.DialBegin += new DialBeginEventHandler(tratar_dial_begin);
-            _manager.DialEnd += new DialEndEventHandler(tratar_dial_end);
-            _manager.Hangup += new HangupEventHandler(tratar_hangup);
-            _manager.VarSet += new VarSetEventHandler(tratar_var_set);
 
             try
             {
@@ -284,9 +277,9 @@ namespace Asterisk.NET.WinForm
             action.Exten = txt_exten.Text;
             action.Priority = 1;
             //action.CallerId = "01111001516093996207";
-            action.Timeout = Convert.ToInt32(txt_timeout.Text); // Default 30000 (30 segundos)
-            action.Variable = string.Format("var1={0},var2={1},var3={2}", txt_var1.Text, txt_var2.Text, txt_var3.Text);
-            action.ActionId = _actionID++.ToString();//"ABCABCTODACRIANCATEMQUELEREESCREVER";
+            action.Timeout = Convert.ToInt32(txt_timeout.Text);
+            action.Variable = txt_variables.Text;
+            action.ActionId = _actionID++.ToString();
 
             ManagerResponse mr = _manager.SendAction(action);
             register_spy(action.ToString());
@@ -500,5 +493,49 @@ namespace Asterisk.NET.WinForm
 
             reader.Close();
         }
+
+        private void chkDialBegin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_manager == null)
+                return;
+
+            if (chkDialBegin.Checked)
+                _manager.DialBegin += new DialBeginEventHandler(tratar_dial_begin);
+            else
+                _manager.DialBegin -= new DialBeginEventHandler(tratar_dial_begin);            
+        }
+
+        private void chkDialEnd_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_manager == null)
+                return;
+
+            if (chkDialEnd.Checked)
+                _manager.DialEnd += new DialEndEventHandler(tratar_dial_end);
+            else
+                _manager.DialEnd -= new DialEndEventHandler(tratar_dial_end);
+        }
+
+        private void chk_hangup_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_manager == null)
+                return;
+
+            if (chk_hangup.Checked)
+                _manager.Hangup += new HangupEventHandler(tratar_hangup);
+            else
+                _manager.Hangup -= new HangupEventHandler(tratar_hangup);
+        }
+
+        private void chkVarSet_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_manager == null)
+                return;
+
+            if (chkVarSet.Checked)
+                _manager.VarSet += new VarSetEventHandler(tratar_var_set);
+            else
+                _manager.VarSet -= new VarSetEventHandler(tratar_var_set);
+        }        
     }
 }
