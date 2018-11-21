@@ -106,14 +106,14 @@ namespace Asterisk.NET.WinForm
 
             if (_conectado)
             {
-                btn_conexao.Text = "Desconectar";
-                lbl_status.Text = String.Format("Conectado no {0}", _address);
+                btn_conexao.Text = "Disconnect";
+                lbl_status.Text = String.Format("Connected in {0}", _address);
                 lbl_status.ForeColor = Color.Blue;
             }
             else
             {
-                btn_conexao.Text = "Conectar";
-                lbl_status.Text = "Desconectado";
+                btn_conexao.Text = "Connect";
+                lbl_status.Text = "Disconnected";
                 lbl_status.ForeColor = Color.DarkRed;
             }
         }
@@ -256,11 +256,11 @@ namespace Asterisk.NET.WinForm
             foreach (KeyValuePair<int, string> message_spy in _messages_spy)
             {
                 if (message_spy.Value.ToLower().Contains(_filter))
-                {
                     register_spy(message_spy.Value, message_spy.Key);
-                    qtd_ocorrencias_filtro++;
-                }
             }
+
+            if (_filter.Length == 0)
+                qtd_ocorrencias_filtro = 0;
 
             lbl_ocorrencias_filtro.Text = String.Format("Ocorrências no filtro: {0}", qtd_ocorrencias_filtro.ToString());
         }
@@ -401,8 +401,8 @@ namespace Asterisk.NET.WinForm
 
         private void btn_expand_collapse_Click(object sender, EventArgs e)
         {
-            this.Size = btn_expand_collapse.Text.Contains("> >") ? new Size(565, 516) : new Size(252, 516);
-            btn_expand_collapse.Text = btn_expand_collapse.Text.Contains("> >") ? "< <" : "> >";
+            splitContainer.SplitterDistance = btn_expand_collapse.Text.Contains(">>") ? 250 : 27;
+            btn_expand_collapse.Text = btn_expand_collapse.Text.Contains(">>") ? "<<" : ">>";
         }
 
         private void btn_filtrar_Click(object sender, EventArgs e)
@@ -536,6 +536,11 @@ namespace Asterisk.NET.WinForm
                 _manager.VarSet += new VarSetEventHandler(tratar_var_set);
             else
                 _manager.VarSet -= new VarSetEventHandler(tratar_var_set);
-        }        
+        }
+
+        private void FormMain_SizeChanged(object sender, EventArgs e)
+        {
+            splitContainer.SplitterDistance = btn_expand_collapse.Text.Contains("<<") ? 250 : 27;
+        }
     }
 }
