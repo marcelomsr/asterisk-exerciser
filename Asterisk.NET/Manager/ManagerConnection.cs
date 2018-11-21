@@ -2227,7 +2227,10 @@ namespace Asterisk.NET.Manager
 					return;
 				}
 			}
-			#endregion
+            #endregion
+
+            // MARCELO: Sai do método para não ficar reconectando o tempo todo.
+            return;
 
 			if (reconnected && e is DisconnectEvent)
 			{

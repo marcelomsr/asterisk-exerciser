@@ -361,10 +361,10 @@ namespace Asterisk.NET.WinForm
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rch_txt_spy.BackColor = System.Drawing.Color.White;
-            this.rch_txt_spy.Location = new System.Drawing.Point(5, 46);
+            this.rch_txt_spy.Location = new System.Drawing.Point(6, 38);
             this.rch_txt_spy.Name = "rch_txt_spy";
             this.rch_txt_spy.ReadOnly = true;
-            this.rch_txt_spy.Size = new System.Drawing.Size(648, 507);
+            this.rch_txt_spy.Size = new System.Drawing.Size(646, 514);
             this.rch_txt_spy.TabIndex = 29;
             this.rch_txt_spy.Text = "";
             this.rch_txt_spy.WordWrap = false;
@@ -372,7 +372,7 @@ namespace Asterisk.NET.WinForm
             // 
             // txt_filter
             // 
-            this.txt_filter.Location = new System.Drawing.Point(3, 4);
+            this.txt_filter.Location = new System.Drawing.Point(6, 9);
             this.txt_filter.Name = "txt_filter";
             this.txt_filter.Size = new System.Drawing.Size(225, 20);
             this.txt_filter.TabIndex = 30;
@@ -380,7 +380,7 @@ namespace Asterisk.NET.WinForm
             // 
             // btn_filter
             // 
-            this.btn_filter.Location = new System.Drawing.Point(234, 2);
+            this.btn_filter.Location = new System.Drawing.Point(237, 8);
             this.btn_filter.Name = "btn_filter";
             this.btn_filter.Size = new System.Drawing.Size(73, 23);
             this.btn_filter.TabIndex = 31;
@@ -391,7 +391,7 @@ namespace Asterisk.NET.WinForm
             // lbl_ocorrencias_filtro
             // 
             this.lbl_ocorrencias_filtro.AutoSize = true;
-            this.lbl_ocorrencias_filtro.Location = new System.Drawing.Point(0, 27);
+            this.lbl_ocorrencias_filtro.Location = new System.Drawing.Point(394, 13);
             this.lbl_ocorrencias_filtro.Name = "lbl_ocorrencias_filtro";
             this.lbl_ocorrencias_filtro.Size = new System.Drawing.Size(113, 13);
             this.lbl_ocorrencias_filtro.TabIndex = 32;
@@ -399,7 +399,7 @@ namespace Asterisk.NET.WinForm
             // 
             // btn_clear_filter
             // 
-            this.btn_clear_filter.Location = new System.Drawing.Point(313, 2);
+            this.btn_clear_filter.Location = new System.Drawing.Point(315, 8);
             this.btn_clear_filter.Name = "btn_clear_filter";
             this.btn_clear_filter.Size = new System.Drawing.Size(73, 23);
             this.btn_clear_filter.TabIndex = 33;

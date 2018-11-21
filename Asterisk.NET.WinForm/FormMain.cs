@@ -540,7 +540,11 @@ namespace Asterisk.NET.WinForm
 
         private void FormMain_SizeChanged(object sender, EventArgs e)
         {
-            splitContainer.SplitterDistance = btn_expand_collapse.Text.Contains("<<") ? 250 : 27;
+            try {
+                splitContainer.SplitterDistance = btn_expand_collapse.Text.Contains("<<") ? 250 : 27;
+            }
+            catch
+            { }            
         }
     }
 }
