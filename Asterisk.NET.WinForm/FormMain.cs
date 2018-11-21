@@ -23,7 +23,6 @@ namespace Asterisk.NET.WinForm
         private string _password;
         private bool _gravando = false;
 
-        private int _actionID;
         private ManagerConnection _manager;
 
         // Mensagens enviadas e recebidas do Asterisk.
@@ -35,7 +34,6 @@ namespace Asterisk.NET.WinForm
         {
             InitializeComponent();
 
-            _actionID = 0;
             _manager = null;
 
             _messages_spy = new Dictionary<int, string>();
@@ -56,9 +54,11 @@ namespace Asterisk.NET.WinForm
             _password = this.tbPassword.Text;
 
             _manager = new ManagerConnection(_address, _port, _user, _password);
+            _manager.PingInterval = 0;
 
             // Define os eventos
             _manager.UnhandledEvent += new ManagerEventHandler(manager_Events);
+            _manager.EveryActionSended += new EveryActionSendedHandler(manager_actions_sended);
             _manager.ConnectionState += new ConnectionStateEventHandler(tratar_connection_state);
 
             try
@@ -124,6 +124,11 @@ namespace Asterisk.NET.WinForm
         {
             register_spy(e.ToString());
         }
+
+        void manager_actions_sended(object sender, ManagerEvent e)
+        {
+            register_spy(sender.ToString());
+        }        
 
         private void tratar_connection_state(object sender, ConnectionStateEvent e)
         {
@@ -222,9 +227,13 @@ namespace Asterisk.NET.WinForm
                 return;
             }
 
-            rch_txt_spy.AppendText("\r\n");
-            rch_txt_spy.AppendText(text);
-            rch_txt_spy.AppendText("\r\n");
+            // Limpa o final do comando para dar a quebra de linha no texto exibido.
+            text = text.Replace("\r\n\r\n", "");
+
+            rch_txt_spy.AppendText("\r\n" + text + "\r\n");
+
+            rch_txt_spy.ForeColor = Color.White;
+            rch_txt_spy.BackColor = Color.Black;
             rch_txt_spy.ScrollToCaret();
 
             // Se o key não for nulo é porque está filtrando, então não adiciona nas mensagens.
@@ -279,10 +288,8 @@ namespace Asterisk.NET.WinForm
             //action.CallerId = "01111001516093996207";
             action.Timeout = Convert.ToInt32(txt_timeout.Text);
             action.Variable = txt_variables.Text;
-            action.ActionId = _actionID++.ToString();
 
             ManagerResponse mr = _manager.SendAction(action);
-            register_spy(action.ToString());
             register_spy(mr.ToString());
 
             btn_desligar.Enabled = mr.IsSuccess();
@@ -296,10 +303,8 @@ namespace Asterisk.NET.WinForm
                 send_stop_mix_monitor_action();
 
             var action = new HangupAction(txt_channel.Text);
-            action.ActionId = _actionID++.ToString();
 
             ManagerResponse mr = _manager.SendAction(action);
-            register_spy(action.ToString());
             register_spy(mr.ToString());
 
             btn_discar.Enabled = mr.IsSuccess();
@@ -310,14 +315,12 @@ namespace Asterisk.NET.WinForm
         private void send_redirect_action()
         {
             var action = new RedirectAction();
-            action.ActionId = _actionID++.ToString();
             action.Channel = "SIP/110002";
             action.Exten = "110002";
             action.Context = "lbv-spo";
             action.Priority = 1;
 
             ManagerResponse mr = _manager.SendAction(action);
-            register_spy(action.ToString());
             register_spy(mr.ToString());
         }
 
@@ -327,20 +330,17 @@ namespace Asterisk.NET.WinForm
             action.Command = txt_command.Text;
 
             ManagerResponse mr = _manager.SendAction(action);
-            register_spy(action.ToString());
             register_spy(mr.ToString());
         }
 
         private void send_mix_monitor_action()
         {
             var action = new MixMonitorAction();
-            action.ActionId = _actionID++.ToString();
             action.Channel = txt_channel.Text;
             string nmr_arquivo = DateTime.Now.ToString("yyyyMMddHHmmss");
             action.File = nmr_arquivo + ".wav";
 
             ManagerResponse mr = _manager.SendAction(action);
-            register_spy(action.ToString());
             register_spy(mr.ToString());
 
             _gravando = mr.IsSuccess();
@@ -352,11 +352,9 @@ namespace Asterisk.NET.WinForm
         private void send_stop_mix_monitor_action()
         {
             var action = new StopMixMonitorAction();
-            action.ActionId = _actionID++.ToString();
             action.Channel = txt_channel.Text;
 
             ManagerResponse mr = _manager.SendAction(action);
-            register_spy(action.ToString());
             register_spy(mr.ToString());
 
             _gravando = !mr.IsSuccess();

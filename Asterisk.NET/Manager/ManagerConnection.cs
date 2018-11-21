@@ -15,9 +15,10 @@ using Asterisk.NET.Util;
 
 namespace Asterisk.NET.Manager
 {
-	#region Event delegate
+    #region Event delegate
 
-	public delegate void ManagerEventHandler(object sender, ManagerEvent e);
+    public delegate void EveryActionSendedHandler(object sender, ManagerEvent e);
+    public delegate void ManagerEventHandler(object sender, ManagerEvent e);
 	public delegate void AgentCallbackLoginEventHandler(object sender, Event.AgentCallbackLoginEvent e);
 	public delegate void AgentCallbackLogoffEventHandler(object sender, Event.AgentCallbackLogoffEvent e);
 	public delegate void AgentCalledEventHandler(object sender, Event.AgentCalledEvent e);
@@ -141,14 +142,18 @@ namespace Asterisk.NET.Manager
 		/// <summary> Default Slow Reconnect interval in milliseconds.</summary>
 		private int reconnectIntervalMax = 10000;
 
-		#endregion
+        #endregion
 
-		#region Events
+        #region Events
 
-		/// <summary>
-		/// An UnhandledEvent is triggered on unknown event.
-		/// </summary>
-		public event ManagerEventHandler UnhandledEvent;
+        /// <summary>
+        /// An UnhandledEvent is triggered on unknown event.
+        /// </summary>
+        public event EveryActionSendedHandler EveryActionSended;
+        /// <summary>
+        /// An UnhandledEvent is triggered on unknown event.
+        /// </summary>
+        public event ManagerEventHandler UnhandledEvent;
 		/// <summary>
 		/// An AgentCallbackLogin is triggered when an agent is successfully logged in.
 		/// </summary>
@@ -1854,6 +1859,7 @@ namespace Asterisk.NET.Manager
 
 		private void sendToAsterisk(string buffer)
 		{
+            EveryActionSended(buffer, null);
 			mrSocket.Write(buffer);
 		}
 
@@ -2228,9 +2234,6 @@ namespace Asterisk.NET.Manager
 				}
 			}
             #endregion
-
-            // MARCELO: Sai do método para não ficar reconectando o tempo todo.
-            return;
 
 			if (reconnected && e is DisconnectEvent)
 			{

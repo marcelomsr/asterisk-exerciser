@@ -261,7 +261,6 @@
     <Compile Include="Manager\Event\ZapShowChannelsEvent.cs" />
     <Compile Include="Manager\Exceptions\ManagerException.cs" />
     <Compile Include="Manager\ManagerReader.cs" />
-    <Compile Include="Manager\Originate.cs" />
     <Compile Include="Manager\ResponseEventHandler.cs" />
     <Compile Include="Manager\ResponseEvents.cs" />
     <Compile Include="Manager\ResponseHandler.cs" />
