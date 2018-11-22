@@ -640,7 +640,7 @@ namespace Asterisk.NET.WinForm
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Client for Asterisk";
+            this.Text = "Client for Asterisk 1.0";
             this.SizeChanged += new System.EventHandler(this.FormMain_SizeChanged);
             this.grp_box_connection.ResumeLayout(false);
             this.grp_box_connection.PerformLayout();

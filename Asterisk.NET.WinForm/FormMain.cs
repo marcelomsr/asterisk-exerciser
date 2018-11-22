@@ -41,9 +41,9 @@ namespace Asterisk.NET.WinForm
             _filter = "";
 
             string arquivo_dados_conexao = Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO;
-
+            
             if (File.Exists(arquivo_dados_conexao))
-                carregar_dados_conexao();
+                carregar_preferencias();
         }
 
         private void conectar()
@@ -366,7 +366,7 @@ namespace Asterisk.NET.WinForm
 
         private void btn_conexao_Click(object sender, EventArgs e)
         {
-            salvar_dados_conexao();
+            salvar_preferencias();
 
             if (_conectado)
                 desconectar();
@@ -458,14 +458,15 @@ namespace Asterisk.NET.WinForm
             rch_txt_spy.Copy();
         }
 
-        private void salvar_dados_conexao()
+        private void salvar_preferencias()
         {
             StreamWriter wr = new StreamWriter(Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO, false, Encoding.UTF8);
-            wr.Write(String.Format("{0}\r\n{1}\r\n{2}\r\n{3}", tbAddress.Text, tbPort.Text, tbUser.Text, tbPassword.Text));
+            wr.Write(String.Format("{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4}\r\n{5}",
+                tbAddress.Text, tbPort.Text, tbUser.Text, tbPassword.Text, rch_txt_spy.BackColor.Name, rch_txt_spy.ForeColor.Name));
             wr.Close();
         }
 
-        private void carregar_dados_conexao()
+        private void carregar_preferencias()
         {
             StreamReader reader = new StreamReader(Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO, Encoding.UTF8);
 
@@ -484,9 +485,50 @@ namespace Asterisk.NET.WinForm
 
                 if (i == 3)
                     tbPassword.Text = linha;
+
+                if (i == 4)
+                    change_background_color(descobrir_cor(linha));
+
+                if (i == 5)
+                    change_fore_color(descobrir_cor(linha));
             }
 
             reader.Close();
+        }
+
+
+        private Color descobrir_cor(string cor)
+        {
+            Color color =  Color.White;
+
+            switch(cor.ToLower())
+            {
+                case "white":
+                    color = Color.White;
+                    break;
+
+                case "black":
+                    color = Color.Black;
+                    break;
+
+                case "darkblue":
+                    color = Color.DarkBlue;
+                    break;
+
+                case "yellow":
+                    color = Color.Yellow;
+                    break;
+
+                case "red":
+                    color = Color.Red;
+                    break;
+
+                default:
+                    color = Color.Transparent;
+                    break;
+            }
+            
+            return color;
         }
 
         private void chkDialBegin_CheckedChanged(object sender, EventArgs e)
@@ -542,54 +584,73 @@ namespace Asterisk.NET.WinForm
             { }            
         }
 
-        private void alterar_cor_fundo(Color color)
+        #region Configurações de exibição do texto rch_txt_spy
+
+        private void change_background_color(Color color)
         {
-            rch_txt_spy.BackColor = color;
+            if (color == Color.Transparent)
+                rch_txt_spy.BackColor = Color.White;
+
+            brancoToolStripMenuItem.Checked = (color == Color.White);
+            pretoToolStripMenuItem.Checked = (color == Color.Black);
+            azulToolStripMenuItem.Checked = (color == Color.DarkBlue);
+
+            salvar_preferencias();
         }
 
-        private void alterar_cor_texto(Color color)
+        private void change_fore_color(Color color, ToolStripMenuItem itemChecked = null)
         {
-            rch_txt_spy.ForeColor = color;
+            if(color == Color.Transparent)
+                rch_txt_spy.ForeColor = Color.Black;
+
+            pretoToolStripMenuItem1.Checked = (color == Color.Black);
+            brancoToolStripMenuItem1.Checked = (color == Color.White);
+            amareloToolStripMenuItem.Checked = (color == Color.Yellow);
+            azulToolStripMenuItem1.Checked = (color == Color.DarkBlue);
+            vermelhoToolStripMenuItem.Checked = (color == Color.Red);
+
+            salvar_preferencias();
         }
 
         private void brancoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            alterar_cor_fundo(Color.White);
+            change_background_color(Color.White);
         }
         
         private void pretoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            alterar_cor_fundo(Color.Black);
+            change_background_color(Color.Black);
         }
 
         private void azulToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            alterar_cor_fundo(Color.DarkBlue);
+            change_background_color(Color.DarkBlue);
         }
 
         private void pretoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            alterar_cor_texto(Color.Black);
+            change_fore_color(Color.Black);
         }
 
         private void brancoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            alterar_cor_texto(Color.White);
+            change_fore_color(Color.White);
         }
 
         private void amareloToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            alterar_cor_texto(Color.Yellow);
+            change_fore_color(Color.Yellow);
         }
 
         private void azulToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            alterar_cor_texto(Color.DarkBlue);
+            change_fore_color(Color.DarkBlue);
         }
 
         private void vermelhoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            alterar_cor_texto(Color.Red);
+            change_fore_color(Color.Red);
         }
+        #endregion
     }
 }
