@@ -231,9 +231,6 @@ namespace Asterisk.NET.WinForm
             text = text.Replace("\r\n\r\n", "");
 
             rch_txt_spy.AppendText("\r\n" + text + "\r\n");
-
-            rch_txt_spy.ForeColor = Color.White;
-            rch_txt_spy.BackColor = Color.Black;
             rch_txt_spy.ScrollToCaret();
 
             // Se o key não for nulo é porque está filtrando, então não adiciona nas mensagens.
@@ -543,6 +540,56 @@ namespace Asterisk.NET.WinForm
             }
             catch
             { }            
+        }
+
+        private void alterar_cor_fundo(Color color)
+        {
+            rch_txt_spy.BackColor = color;
+        }
+
+        private void alterar_cor_texto(Color color)
+        {
+            rch_txt_spy.ForeColor = color;
+        }
+
+        private void brancoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alterar_cor_fundo(Color.White);
+        }
+        
+        private void pretoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alterar_cor_fundo(Color.Black);
+        }
+
+        private void azulToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alterar_cor_fundo(Color.DarkBlue);
+        }
+
+        private void pretoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            alterar_cor_texto(Color.Black);
+        }
+
+        private void brancoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            alterar_cor_texto(Color.White);
+        }
+
+        private void amareloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alterar_cor_texto(Color.Yellow);
+        }
+
+        private void azulToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            alterar_cor_texto(Color.DarkBlue);
+        }
+
+        private void vermelhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alterar_cor_texto(Color.Red);
         }
     }
 }

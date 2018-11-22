@@ -70,12 +70,25 @@ namespace Asterisk.NET.WinForm
             this.chk_hangup = new System.Windows.Forms.CheckBox();
             this.chkVarSet = new System.Windows.Forms.CheckBox();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.opçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.corDeFundoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brancoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pretoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.azulToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.corDoTextoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pretoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.brancoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.amareloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.azulToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.vermelhoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grp_box_connection.SuspendLayout();
             this.stt_strip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_host
@@ -363,7 +376,7 @@ namespace Asterisk.NET.WinForm
             this.rch_txt_spy.Location = new System.Drawing.Point(0, 0);
             this.rch_txt_spy.Name = "rch_txt_spy";
             this.rch_txt_spy.ReadOnly = true;
-            this.rch_txt_spy.Size = new System.Drawing.Size(688, 577);
+            this.rch_txt_spy.Size = new System.Drawing.Size(688, 553);
             this.rch_txt_spy.TabIndex = 29;
             this.rch_txt_spy.Text = "";
             this.rch_txt_spy.WordWrap = false;
@@ -476,7 +489,7 @@ namespace Asterisk.NET.WinForm
             // 
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Location = new System.Drawing.Point(0, 24);
             this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
@@ -514,9 +527,106 @@ namespace Asterisk.NET.WinForm
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.rch_txt_spy);
-            this.splitContainer.Size = new System.Drawing.Size(958, 581);
+            this.splitContainer.Size = new System.Drawing.Size(958, 557);
             this.splitContainer.SplitterDistance = 262;
             this.splitContainer.TabIndex = 40;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.opçõesToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(958, 24);
+            this.menuStrip1.TabIndex = 41;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // opçõesToolStripMenuItem
+            // 
+            this.opçõesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.corDeFundoToolStripMenuItem,
+            this.corDoTextoToolStripMenuItem});
+            this.opçõesToolStripMenuItem.Name = "opçõesToolStripMenuItem";
+            this.opçõesToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.opçõesToolStripMenuItem.Text = "Opções";
+            // 
+            // corDeFundoToolStripMenuItem
+            // 
+            this.corDeFundoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.brancoToolStripMenuItem,
+            this.pretoToolStripMenuItem,
+            this.azulToolStripMenuItem});
+            this.corDeFundoToolStripMenuItem.Name = "corDeFundoToolStripMenuItem";
+            this.corDeFundoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.corDeFundoToolStripMenuItem.Text = "Cor de fundo";
+            // 
+            // brancoToolStripMenuItem
+            // 
+            this.brancoToolStripMenuItem.Name = "brancoToolStripMenuItem";
+            this.brancoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.brancoToolStripMenuItem.Text = "Branco";
+            this.brancoToolStripMenuItem.Click += new System.EventHandler(this.brancoToolStripMenuItem_Click);
+            // 
+            // pretoToolStripMenuItem
+            // 
+            this.pretoToolStripMenuItem.Name = "pretoToolStripMenuItem";
+            this.pretoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pretoToolStripMenuItem.Text = "Preto";
+            this.pretoToolStripMenuItem.Click += new System.EventHandler(this.pretoToolStripMenuItem_Click);
+            // 
+            // azulToolStripMenuItem
+            // 
+            this.azulToolStripMenuItem.Name = "azulToolStripMenuItem";
+            this.azulToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.azulToolStripMenuItem.Text = "Azul";
+            this.azulToolStripMenuItem.Click += new System.EventHandler(this.azulToolStripMenuItem_Click);
+            // 
+            // corDoTextoToolStripMenuItem
+            // 
+            this.corDoTextoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pretoToolStripMenuItem1,
+            this.brancoToolStripMenuItem1,
+            this.amareloToolStripMenuItem,
+            this.azulToolStripMenuItem1,
+            this.vermelhoToolStripMenuItem});
+            this.corDoTextoToolStripMenuItem.Name = "corDoTextoToolStripMenuItem";
+            this.corDoTextoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.corDoTextoToolStripMenuItem.Text = "Cor do texto";
+            // 
+            // pretoToolStripMenuItem1
+            // 
+            this.pretoToolStripMenuItem1.Name = "pretoToolStripMenuItem1";
+            this.pretoToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.pretoToolStripMenuItem1.Text = "Preto";
+            this.pretoToolStripMenuItem1.Click += new System.EventHandler(this.pretoToolStripMenuItem1_Click);
+            // 
+            // brancoToolStripMenuItem1
+            // 
+            this.brancoToolStripMenuItem1.Name = "brancoToolStripMenuItem1";
+            this.brancoToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.brancoToolStripMenuItem1.Text = "Branco";
+            this.brancoToolStripMenuItem1.Click += new System.EventHandler(this.brancoToolStripMenuItem1_Click);
+            // 
+            // amareloToolStripMenuItem
+            // 
+            this.amareloToolStripMenuItem.Name = "amareloToolStripMenuItem";
+            this.amareloToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.amareloToolStripMenuItem.Text = "Amarelo";
+            this.amareloToolStripMenuItem.Click += new System.EventHandler(this.amareloToolStripMenuItem_Click);
+            // 
+            // azulToolStripMenuItem1
+            // 
+            this.azulToolStripMenuItem1.Name = "azulToolStripMenuItem1";
+            this.azulToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.azulToolStripMenuItem1.Text = "Azul";
+            this.azulToolStripMenuItem1.Click += new System.EventHandler(this.azulToolStripMenuItem1_Click);
+            // 
+            // vermelhoToolStripMenuItem
+            // 
+            this.vermelhoToolStripMenuItem.Name = "vermelhoToolStripMenuItem";
+            this.vermelhoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vermelhoToolStripMenuItem.Text = "Vermelho";
+            this.vermelhoToolStripMenuItem.Click += new System.EventHandler(this.vermelhoToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -525,7 +635,9 @@ namespace Asterisk.NET.WinForm
             this.ClientSize = new System.Drawing.Size(958, 603);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.stt_strip);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Client for Asterisk";
@@ -539,6 +651,8 @@ namespace Asterisk.NET.WinForm
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -588,6 +702,18 @@ namespace Asterisk.NET.WinForm
         private System.Windows.Forms.CheckBox chk_hangup;
         private System.Windows.Forms.CheckBox chkVarSet;
         private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem opçõesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem corDeFundoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brancoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pretoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem azulToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem corDoTextoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pretoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem brancoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem amareloToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem azulToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem vermelhoToolStripMenuItem;
     }
 }
 
