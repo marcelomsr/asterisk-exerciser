@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Asterisk.NET.WinForm
@@ -30,6 +31,8 @@ namespace Asterisk.NET.WinForm
         private Object _lock_messages;
         private string _filter;
 
+        private object _lock_file = new object();
+
         public FormMain()
         {
             InitializeComponent();
@@ -41,7 +44,7 @@ namespace Asterisk.NET.WinForm
             _filter = "";
 
             string arquivo_dados_conexao = Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO;
-            
+
             if (File.Exists(arquivo_dados_conexao))
                 carregar_preferencias();
         }
@@ -460,40 +463,46 @@ namespace Asterisk.NET.WinForm
 
         private void salvar_preferencias()
         {
-            StreamWriter wr = new StreamWriter(Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO, false, Encoding.UTF8);
-            wr.Write(String.Format("{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4}\r\n{5}",
-                tbAddress.Text, tbPort.Text, tbUser.Text, tbPassword.Text, rch_txt_spy.BackColor.Name, rch_txt_spy.ForeColor.Name));
-            wr.Close();
+            lock (_lock_file)
+            {
+                StreamWriter wr = new StreamWriter(Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO, false, Encoding.UTF8);
+                wr.Write(String.Format("{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4}\r\n{5}",
+                    tbAddress.Text, tbPort.Text, tbUser.Text, tbPassword.Text, rch_txt_spy.BackColor.Name, rch_txt_spy.ForeColor.Name));
+                wr.Close();
+            }
         }
 
         private void carregar_preferencias()
         {
-            StreamReader reader = new StreamReader(Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO, Encoding.UTF8);
+            lock (_lock_file)
+            { 
+                StreamReader reader = new StreamReader(Path.GetTempPath() + _NME_ARQUIVO_DADOS_CONEXAO, Encoding.UTF8);
 
-            string linha = string.Empty;
+                string linha = string.Empty;
 
-            for (int i = 0; (linha = reader.ReadLine()) != null; i++)
-            {
-                if (i == 0)
-                    tbAddress.Text = linha;
+                for (int i = 0; (linha = reader.ReadLine()) != null; i++)
+                {
+                    if (i == 0)
+                        tbAddress.Text = linha;
 
-                if (i == 1)
-                    tbPort.Text = linha;
+                    if (i == 1)
+                        tbPort.Text = linha;
 
-                if (i == 2)
-                    tbUser.Text = linha;
+                    if (i == 2)
+                        tbUser.Text = linha;
 
-                if (i == 3)
-                    tbPassword.Text = linha;
+                    if (i == 3)
+                        tbPassword.Text = linha;
 
-                if (i == 4)
-                    change_background_color(descobrir_cor(linha));
+                    if (i == 4)
+                        change_background_color(descobrir_cor(linha));
 
-                if (i == 5)
-                    change_fore_color(descobrir_cor(linha));
+                    if (i == 5)
+                        change_fore_color(descobrir_cor(linha));
+                }
+
+                reader.Close();
             }
-
-            reader.Close();
         }
 
 
@@ -589,19 +598,23 @@ namespace Asterisk.NET.WinForm
         private void change_background_color(Color color)
         {
             if (color == Color.Transparent)
-                rch_txt_spy.BackColor = Color.White;
+                color = Color.White;
+
+            rch_txt_spy.BackColor = color;
 
             brancoToolStripMenuItem.Checked = (color == Color.White);
             pretoToolStripMenuItem.Checked = (color == Color.Black);
             azulToolStripMenuItem.Checked = (color == Color.DarkBlue);
 
-            salvar_preferencias();
+            new Thread(salvar_preferencias).Start();
         }
 
         private void change_fore_color(Color color, ToolStripMenuItem itemChecked = null)
         {
-            if(color == Color.Transparent)
-                rch_txt_spy.ForeColor = Color.Black;
+            if (color == Color.Transparent)
+                color = Color.Black;
+
+            rch_txt_spy.ForeColor = color;
 
             pretoToolStripMenuItem1.Checked = (color == Color.Black);
             brancoToolStripMenuItem1.Checked = (color == Color.White);
@@ -609,7 +622,7 @@ namespace Asterisk.NET.WinForm
             azulToolStripMenuItem1.Checked = (color == Color.DarkBlue);
             vermelhoToolStripMenuItem.Checked = (color == Color.Red);
 
-            salvar_preferencias();
+            new Thread(salvar_preferencias).Start();
         }
 
         private void brancoToolStripMenuItem_Click(object sender, EventArgs e)
