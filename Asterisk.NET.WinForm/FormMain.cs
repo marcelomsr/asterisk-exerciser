@@ -265,7 +265,10 @@ namespace Asterisk.NET.WinForm
             foreach (KeyValuePair<int, string> message_spy in _messages_spy)
             {
                 if (message_spy.Value.ToLower().Contains(_filter))
+                {
                     register_spy(message_spy.Value, message_spy.Key);
+                    qtd_ocorrencias_filtro++;
+                }                    
             }
 
             if (_filter.Length == 0)

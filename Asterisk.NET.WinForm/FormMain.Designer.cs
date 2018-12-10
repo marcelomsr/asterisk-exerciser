@@ -557,27 +557,27 @@ namespace Asterisk.NET.WinForm
             this.pretoToolStripMenuItem,
             this.azulToolStripMenuItem});
             this.corDeFundoToolStripMenuItem.Name = "corDeFundoToolStripMenuItem";
-            this.corDeFundoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.corDeFundoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.corDeFundoToolStripMenuItem.Text = "Cor de fundo";
             // 
             // brancoToolStripMenuItem
             // 
             this.brancoToolStripMenuItem.Name = "brancoToolStripMenuItem";
-            this.brancoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.brancoToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.brancoToolStripMenuItem.Text = "Branco";
             this.brancoToolStripMenuItem.Click += new System.EventHandler(this.brancoToolStripMenuItem_Click);
             // 
             // pretoToolStripMenuItem
             // 
             this.pretoToolStripMenuItem.Name = "pretoToolStripMenuItem";
-            this.pretoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pretoToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.pretoToolStripMenuItem.Text = "Preto";
             this.pretoToolStripMenuItem.Click += new System.EventHandler(this.pretoToolStripMenuItem_Click);
             // 
             // azulToolStripMenuItem
             // 
             this.azulToolStripMenuItem.Name = "azulToolStripMenuItem";
-            this.azulToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.azulToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.azulToolStripMenuItem.Text = "Azul";
             this.azulToolStripMenuItem.Click += new System.EventHandler(this.azulToolStripMenuItem_Click);
             // 
@@ -590,41 +590,41 @@ namespace Asterisk.NET.WinForm
             this.azulToolStripMenuItem1,
             this.vermelhoToolStripMenuItem});
             this.corDoTextoToolStripMenuItem.Name = "corDoTextoToolStripMenuItem";
-            this.corDoTextoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.corDoTextoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.corDoTextoToolStripMenuItem.Text = "Cor do texto";
             // 
             // pretoToolStripMenuItem1
             // 
             this.pretoToolStripMenuItem1.Name = "pretoToolStripMenuItem1";
-            this.pretoToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.pretoToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.pretoToolStripMenuItem1.Text = "Preto";
             this.pretoToolStripMenuItem1.Click += new System.EventHandler(this.pretoToolStripMenuItem1_Click);
             // 
             // brancoToolStripMenuItem1
             // 
             this.brancoToolStripMenuItem1.Name = "brancoToolStripMenuItem1";
-            this.brancoToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.brancoToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.brancoToolStripMenuItem1.Text = "Branco";
             this.brancoToolStripMenuItem1.Click += new System.EventHandler(this.brancoToolStripMenuItem1_Click);
             // 
             // amareloToolStripMenuItem
             // 
             this.amareloToolStripMenuItem.Name = "amareloToolStripMenuItem";
-            this.amareloToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.amareloToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.amareloToolStripMenuItem.Text = "Amarelo";
             this.amareloToolStripMenuItem.Click += new System.EventHandler(this.amareloToolStripMenuItem_Click);
             // 
             // azulToolStripMenuItem1
             // 
             this.azulToolStripMenuItem1.Name = "azulToolStripMenuItem1";
-            this.azulToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.azulToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.azulToolStripMenuItem1.Text = "Azul";
             this.azulToolStripMenuItem1.Click += new System.EventHandler(this.azulToolStripMenuItem1_Click);
             // 
             // vermelhoToolStripMenuItem
             // 
             this.vermelhoToolStripMenuItem.Name = "vermelhoToolStripMenuItem";
-            this.vermelhoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vermelhoToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.vermelhoToolStripMenuItem.Text = "Vermelho";
             this.vermelhoToolStripMenuItem.Click += new System.EventHandler(this.vermelhoToolStripMenuItem_Click);
             // 
